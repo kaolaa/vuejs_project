@@ -60,7 +60,7 @@
                     <el-table-column label="Operations">
                         <template slot-scope="scope">
                             
-                                <button class="button1" v-on:click="handleDelete(scope._id)">delete</button>
+                                <button class="button1" v-on:click="handleDelete(scope.row._id)">delete</button>
                         </template>
                     </el-table-column>
                     
@@ -70,8 +70,8 @@
             <br>
             <form id="formulaireModification" onsubmit="putRequest(event);">
                 <input hidden v-model="id_e" name="id_e" style="width: 250px;"></input>
-                <el-input v-model="name_e" name="nom_e" style="width: 250px;"></el-input>
-                <el-input v-model="cuisine_e" name="cuisine_e" style="width: 250px;"></el-input>
+                <el-input v-model="name_e" name="nom" style="width: 250px;"></el-input>
+                <el-input v-model="cuisine_e" name="cuisine" style="width: 250px;"></el-input>
                 <button class="button1">modifier</button>
 
             </form>
