@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="lib/vue.min.js"></script>
+    <script src="js/script.js"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <title>Todo liste avec VueJS</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+    <div id="app">
+        <br>
+        <div class="container">
+            <!-- <h2>Nombre de restaurant : {{nbRestaurant}}</h2> -->
+
+            <el-input placeholder="Type something" v-model="search">
+                <i slot="prefix" class="el-input__icon el-icon-search"></i>
+            </el-input>
+            <!-- <input type="text" v-model="search"> -->
+            <el-select style="float: right;" v-model="pagesize" size="mini" @change="getDataFromWebService">
+                <el-option :key="5" :label="5" :value=5></el-option>
+                <el-option :key="10" :label="10" :value=10></el-option>
+                <el-option :key="15" :label="15" :value=15></el-option>
+                <el-option :key="20" :label="20" :value=20></el-option>
+            </el-select>
+
+            <!-- <select v-model="pagesize" v-on:click="getDataFromWebService">
+                <option>5</option>
+                <option>10</option>
+                <option>20</option>
+            </select> -->
+            <!-- <button v-show="idshow"  
+            >Ajouter</button> -->
+            <!-- <h2>Liste des choses à faire :</h2> -->
+
+            <!-- <ul>
+            <li v-for="todo in searchrest">
+                {{todo.name}}
+            </li>
+        </ul> -->
+            <template>
+                <el-table highlight-current-row @current-change="handleCurrentChange" :data="searchrest" style="width: 100%">
+                    <!-- <el-table-column prop="_id" label="id" width="180">
+                </el-table-column> -->
+                    <el-table-column prop="name" label="Name" width="250">
+
+                    </el-table-column>
+                    <el-table-column prop="cuisine" label="cuisine">
+                    </el-table-column>
+                    <el-table-column label="Operations">
+                        <template slot-scope="scope">
+                            
+                                <button class="button1" v-on:click="handleDelete(scope._id)">delete</button>
+                        </template>
+                    </el-table-column>
+                    
+                </el-table>
+
+            </template>
+            <br>
+            <form id="formulaireModification" onsubmit="putRequest(event);">
+                <input hidden v-model="id_e" name="id_e" style="width: 250px;"></input>
+                <el-input v-model="name_e" name="nom_e" style="width: 250px;"></el-input>
+                <el-input v-model="cuisine_e" name="cuisine_e" style="width: 250px;"></el-input>
+                <button class="button1">modifier</button>
+
+            </form>
+
+
+
+            <br>
+          
+
+
+
+            <el-button v-on:click="back" type="warning" icon="el-icon-arrow-left" circle :disabled="page == 1 ? true : false"></el-button>
+
+            <el-button v-on:click="next" type="warning" icon="el-icon-arrow-right" style="float: right;" circle :disabled="page == 10 ? true : false"></el-button>
+
+            <div id="AjoutDiv">
+
+                <br>
+                <br>
+                <form onsubmit="postRequest(event);">
+                    <fieldset>
+                        <legend>Ajout d'un restaurant</legend>
+                        <label>
+                            Nom:
+                            <el-input type="text" name="nom" required="" placeholder="What is it called ?">
+                        </label>
+                        <p></p>
+                        <label>
+                            Cuisine:
+                            <el-input type="text" name="cuisine" required="" placeholder="What culture they follow ?">
+                        </label>
+                        <p></p>
+                        <button class="button1">Ajouter</button>
+                    </fieldset>
+                </form>
+                <div id="reponseAjout">
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</body>
+
+</html>
